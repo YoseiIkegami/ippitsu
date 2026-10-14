@@ -1,7 +1,7 @@
 import { animated, useSpring } from "@react-spring/web";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Layer, Line, Stage } from "react-konva";
-import * as Tone from "tone";
+import type * as Tone from "tone";
 import { compositionOf, SCALE_OPTIONS, shapePoints, type Composition, type Point, type ScaleId } from "./composition";
 
 const width = 760;
@@ -23,6 +23,7 @@ export default function App() {
   const previousRef = useRef<StoredLine | null>(null);
   const synth = useRef<Tone.Synth | null>(null);
   const counterSynth = useRef<Tone.Synth | null>(null);
+  const tone = useRef<typeof Tone | null>(null);
   const timers = useRef<number[]>([]);
   const composition = useMemo(() => compositionOf(points, scaleId, height), [points, scaleId]);
   const flourish = useSpring({ opacity: playing ? 1 : 0, transform: `scale(${playing ? 1 : .65})`, config: { tension: 120, friction: 16 }, immediate: reduced });
@@ -41,6 +42,8 @@ export default function App() {
   }, []);
 
   async function enableSound() {
+    const Tone = tone.current ?? await import("tone");
+    tone.current = Tone;
     await Tone.start();
     synth.current ??= new Tone.Synth({ oscillator: { type: "triangle" }, envelope: { attack: .018, decay: .15, sustain: .22, release: .7 } }).toDestination();
     counterSynth.current ??= new Tone.Synth({ oscillator: { type: "sine" }, envelope: { attack: .04, decay: .12, sustain: .12, release: .9 } }).toDestination();
@@ -65,7 +68,8 @@ export default function App() {
     });
     if (partner) {
       partner.events.forEach((event, index) => {
-        const note = Tone.Frequency(event.note).transpose(-5).toNote();
+        const note = tone.current?.Frequency(event.note).transpose(-5).toNote();
+        if (!note) return;
         timers.current.push(window.setTimeout(() => counterSynth.current?.triggerAttackRelease(note, "16n", undefined, .18), 90 + index * beatDuration + beatDuration / 2));
       });
     }
