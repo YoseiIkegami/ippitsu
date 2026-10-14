@@ -1,2 +1,61 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono&family=Yomogi&display=swap');
-* { box-sizing: border-box; } body { margin: 0; color: #fff6e3; background: #100d23; font-family: "DM Mono", monospace; } main { min-height: 100vh; padding: 26px 16px; background: radial-gradient(circle at 50% 10%, #3d1d56, transparent 38%), #100d23; } .shell { max-width: 800px; margin: auto; } a { color: #f8d477; font-size: 12px; } header { padding: 48px 0 25px; text-align: center; } header p { color: #a99add; font-size: 10px; letter-spacing: .18em; } h1 { font-family: Yomogi, cursive; color: #fbda68; font-size: clamp(56px, 12vw, 104px); margin: 8px 0; letter-spacing: .06em; } header span { color: #d9cdeb; font-family: Yomogi, cursive; font-size: 22px; }.controls, .keyboard { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 14px 0; } button { cursor: pointer; border: 1px solid #65518c; border-radius: 999px; padding: 10px 15px; background: #23183b; color: #fff6e3; font: inherit; font-size: 12px; } button:hover, button[aria-pressed="true"] { background: #fbda68; color: #21172f; border-color: #fbda68; } label { font-size: 12px; color: #c9bde4; margin-left: auto; }.canvas-wrap { position: relative; overflow: hidden; border: 1px solid #65518c; border-radius: 26px; background: radial-gradient(circle at center, #292049, #161127 66%); box-shadow: 0 20px 60px #05030e; }.canvas-wrap canvas { display: block; width: 100% !important; height: auto !important; touch-action: none; }.instruction { position: absolute; width: 100%; top: 39%; text-align: center; pointer-events: none; color: #e6daf8; line-height: 1.8; font-family: Yomogi, cursive; font-size: 25px; }.instruction small { font-family: "DM Mono", monospace; font-size: 10px; color: #988cb8; }.sparkles { position: absolute; inset: 0; pointer-events: none; }.sparkles i { position: absolute; left: var(--x); top: var(--y); width: 4px; height: 4px; border-radius: 50%; background: #fff2ad; box-shadow: 0 0 14px 5px #ffcf59; animation: twinkle 800ms var(--d) ease-out forwards; } @keyframes twinkle { from { transform: scale(0); opacity: 0; } 40% { transform: scale(3); opacity: 1; } to { transform: scale(.2); opacity: 0; } }.after { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; margin: 14px 0; border: 1px solid #493b6f; background: #493b6f; }.after div { padding: 16px; background: #18122b; text-align: center; }.after b { display: block; color: #f5d462; font-size: 20px; }.after span { color: #a99abb; font-size: 10px; }.keyboard { margin-top: 28px; }.keyboard p { width: 100%; color: #b8aacf; font-size: 12px; margin-bottom: 0; } footer { padding: 40px 0 18px; text-align: center; color: #887a9d; font-size: 10px; } @media (max-width: 600px) { main { padding: 18px 10px; } .canvas-wrap { border-radius: 18px; } label { margin-left: 0; }.after div { padding: 12px 4px; } }
+
+* { box-sizing: border-box; }
+body { margin: 0; color: #fff6e3; background: #100d23; font-family: "DM Mono", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif; }
+main { min-height: 100vh; padding: 26px 16px; background: radial-gradient(circle at 50% 10%, #3d1d56, transparent 38%), #100d23; }
+.shell { max-width: 800px; margin: auto; }
+a { color: #f8d477; font-size: 13px; }
+header { padding: 44px 0 22px; text-align: center; }
+header p { color: #b7a8de; font-size: 11px; letter-spacing: .14em; }
+h1 { font-family: Yomogi, "Hiragino Kaku Gothic ProN", cursive; color: #fbda68; font-size: clamp(56px, 12vw, 104px); margin: 8px 0; letter-spacing: .06em; }
+header span { color: #eee2fc; font-family: Yomogi, "Hiragino Kaku Gothic ProN", cursive; font-size: 24px; }
+.scale-picker { display: grid; grid-template-columns: 170px 1fr; gap: 16px; padding: 18px; border: 1px solid #5d4a80; border-radius: 18px; background: #1b1432; }
+.scale-picker p, .keyboard p, .score-heading p { margin: 0 0 7px; color: #f8df87; font-size: 13px; }
+.scale-picker small { color: #c7badf; font-size: 12px; line-height: 1.65; }
+.scale-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+button { cursor: pointer; border: 1px solid #65518c; border-radius: 14px; padding: 10px 13px; background: #23183b; color: #fff6e3; font: inherit; font-size: 13px; line-height: 1.35; }
+button:hover, button[aria-pressed="true"] { background: #fbda68; color: #21172f; border-color: #fbda68; }
+button:disabled { cursor: not-allowed; opacity: .48; }
+button:disabled:hover { background: #23183b; color: #fff6e3; border-color: #65518c; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid #7ae1ff; outline-offset: 3px; }
+.scale-options button { text-align: left; }
+.scale-options b, .scale-options span { display: block; }
+.scale-options span { margin-top: 3px; font-size: 11px; opacity: .82; }
+.controls, .keyboard { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 14px 0; }
+.controls button, .keyboard button { border-radius: 999px; }
+label { margin-left: auto; color: #d6cae8; font-size: 13px; }
+.canvas-wrap { position: relative; overflow: hidden; border: 1px solid #65518c; border-radius: 26px; background: radial-gradient(circle at center, #292049, #161127 66%); box-shadow: 0 20px 60px #05030e; }
+.canvas-wrap canvas { display: block; width: 100% !important; height: auto !important; touch-action: none; }
+.beat-grid { position: absolute; z-index: 0; inset: 0 4.7% 0 4.7%; display: grid; grid-template-columns: repeat(8, 1fr); pointer-events: none; }
+.beat-grid span { border-left: 1px dashed rgb(236 223 255 / 15%); padding: 14px 8px; color: rgb(236 223 255 / 36%); font-size: 10px; }
+.beat-grid span:last-child { border-right: 1px dashed rgb(236 223 255 / 15%); }
+.instruction { position: absolute; z-index: 2; width: 100%; top: 38%; margin: 0; text-align: center; pointer-events: none; color: #f0e8ff; font-family: Yomogi, "Hiragino Kaku Gothic ProN", cursive; font-size: 26px; line-height: 1.8; }
+.instruction small { font-family: "DM Mono", "Yu Gothic", sans-serif; font-size: 11px; color: #baabd5; }
+.playhead { position: absolute; inset: 14% 42%; border: 1px solid #fff2ad; border-radius: 999px; box-shadow: 0 0 30px 10px #ffcf59; pointer-events: none; }
+.score { margin: 16px 0 0; padding: 18px; border: 1px solid #493b6f; border-radius: 18px; background: #18122b; }
+.score-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.score-heading button { padding: 7px 10px; font-size: 11px; }
+.score dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 14px 0; background: #493b6f; }
+.score dl div { padding: 13px; background: #211833; }
+.score dt { color: #b7a8d4; font-size: 11px; }
+.score dd { margin: 7px 0 0; color: #fff1b6; font-size: 14px; }
+.score dd small { display: block; margin-top: 4px; color: #b9aede; font-size: 10px; }
+.notes { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; padding: 0; margin: 0; list-style: none; }
+.notes li { min-width: 0; padding: 9px 4px; border: 1px solid #5b4b79; border-radius: 9px; text-align: center; background: #151025; }
+.notes span, .notes b, .notes small { display: block; }
+.notes span { color: #a79abd; font-size: 10px; }
+.notes b { margin: 4px 0; color: #f8df87; font-size: 13px; }
+.notes small { color: #cfc4e4; font-size: 10px; }
+.score-note, .duet-note, .empty-score { margin: 14px 0 0; color: #d8cee8; font-size: 12px; line-height: 1.75; }
+.duet-note { color: #abcdec; }
+.keyboard { margin-top: 28px; }
+.keyboard p { width: 100%; margin-bottom: 0; }
+footer { padding: 40px 0 18px; text-align: center; color: #a297b4; font-size: 11px; }
+@media (max-width: 600px) {
+  main { padding: 18px 10px; }
+  .scale-picker { grid-template-columns: 1fr; }
+  .canvas-wrap { border-radius: 18px; }
+  label { margin-left: 0; }
+  .score dl { grid-template-columns: 1fr; }
+  .notes { grid-template-columns: repeat(4, 1fr); }
+}
